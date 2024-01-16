@@ -25,11 +25,24 @@ def delete(request, todo_id):
 
 def update(request, todo_id):
     todo = get_object_or_404(Todo, pk=todo_id)
-    isCompleted = request.POST.get('isCompleted', False)
-    if isCompleted == 'on':
-        isCompleted = True
-    
-    todo.isCompleted = isCompleted
+    is_completed = request.POST.get('isCompleted', False)
 
-    todo.save()
+    if is_completed == 'on':
+        is_completed = True
+    else:
+        is_completed = False
+
+    todo.isCompleted = is_completed
+    todo.save()  # Save the changes to the database
+
     return redirect('todos:index')
+
+
+
+
+
+   
+
+
+
+
